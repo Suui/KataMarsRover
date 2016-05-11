@@ -13,9 +13,6 @@
 			};
 		}
 
-		public void MoveMarsRoverForward()
-		{
-			MarsRover.MoveForward();
-		}
+		public void MoveMarsRoverForward() => MarsRover.MoveForward();
 	}
 }
