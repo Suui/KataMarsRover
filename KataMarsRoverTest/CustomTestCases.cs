@@ -21,10 +21,10 @@ namespace KataMarsRoverTest
 		{
 			var rotationObjectFor = new Dictionary<string, Rotation>
 			{
-				{ "North", Rotation.North() },
-				{ "East", Rotation.East() },
-				{ "South", Rotation.South() },
-				{ "West", Rotation.West() }
+				{ "North",	Rotation.North() },
+				{ "East",	Rotation.East() },
+				{ "South",	Rotation.South() },
+				{ "West",	Rotation.West() }
 			};
 
 			return rotationObjectFor[stringRotation];
