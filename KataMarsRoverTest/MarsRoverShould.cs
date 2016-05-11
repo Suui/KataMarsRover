@@ -25,7 +25,7 @@ namespace KataMarsRoverTest
 		[Test]
 		public void move_forward_when_facing_north()
 		{
-			var mars = AWorldWithAMarsRoverInTheMiddleFacingNorth();
+			var mars = AWorldWithAMarsRoverInTheMiddleFacing(Rotation.North());
 
 			mars.MoveMarsRoverForward();
 
@@ -35,7 +35,7 @@ namespace KataMarsRoverTest
 		[Test]
 		public void move_forward_when_facing_east()
 		{
-			var mars = AWorldWithAMarsRoverInTheMiddleFacingEast();
+			var mars = AWorldWithAMarsRoverInTheMiddleFacing(Rotation.East());
 
 			mars.MoveMarsRoverForward();
 
@@ -45,7 +45,7 @@ namespace KataMarsRoverTest
 		[Test]
 		public void move_forward_when_facing_south()
 		{
-			var mars = AWorldWithAMarsRoverInTheMiddleFacingSouth();
+			var mars = AWorldWithAMarsRoverInTheMiddleFacing(Rotation.South());
 
 			mars.MoveMarsRoverForward();
 
@@ -55,46 +55,19 @@ namespace KataMarsRoverTest
 		[Test]
 		public void move_forward_when_facing_west()
 		{
-			var mars = AWorldWithAMarsRoverInTheMiddleFacingWest();
+			var mars = AWorldWithAMarsRoverInTheMiddleFacing(Rotation.West());
 
 			mars.MoveMarsRoverForward();
 
 			mars.MarsRoverLocation.ShouldBeEquivalentTo(new Location(-1, 0));
 		}
 
-		private TestWorld AWorldWithAMarsRoverInTheMiddleFacingWest()
+		private static TestWorld AWorldWithAMarsRoverInTheMiddleFacing(Rotation rotation)
 		{
 			return new TestWorld(new MarsRover
 			{
 				Location = new Location(0, 0),
-				Rotation = Rotation.West()
-			});
-		}
-
-		private TestWorld AWorldWithAMarsRoverInTheMiddleFacingSouth()
-		{
-			return new TestWorld(new MarsRover
-			{
-				Location = new Location(0, 0),
-				Rotation = Rotation.South()
-			});
-		}
-
-		private static TestWorld AWorldWithAMarsRoverInTheMiddleFacingEast()
-		{
-			return new TestWorld(new MarsRover
-			{
-				Location = new Location(0, 0),
-				Rotation = Rotation.East()
-			});
-		}
-
-		private static TestWorld AWorldWithAMarsRoverInTheMiddleFacingNorth()
-		{
-			return new TestWorld(new MarsRover
-			{
-				Location = new Location(0, 0),
-				Rotation = Rotation.North()
+				Rotation = rotation
 			});
 		}
 	}
