@@ -16,5 +16,7 @@
 		public void MoveMarsRoverForward() => MarsRover.MoveForward();
 
 		public void RotateMarsRoverToTheLeft() => MarsRover.RotateToTheLeft();
+
+		public void RotateMarsRoverToTheRight() => MarsRover.RotateToTheRight();
 	}
 }

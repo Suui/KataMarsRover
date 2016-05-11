@@ -46,6 +46,19 @@ namespace KataMarsRoverTest
 			mars.MarsRoverRotation.ShouldBeEquivalentTo(expectedRotation);
 		}
 
+		[RotationTestCase("North",	"East")]
+		[RotationTestCase("East",	"South")]
+		[RotationTestCase("South",	"West")]
+		[RotationTestCase("West",	"North")]
+		public void rotate_to_the_right(Rotation currentRotation, Rotation expectedRotation)
+		{
+			var mars = AWorldWithAMarsRoverInTheMiddleFacing(currentRotation);
+
+			mars.RotateMarsRoverToTheRight();
+
+			mars.MarsRoverRotation.ShouldBeEquivalentTo(expectedRotation);
+		}
+
 		private static TestWorld AWorldWithAMarsRoverInTheMiddleFacing(Rotation rotation)
 		{
 			return new TestWorld(new MarsRover
