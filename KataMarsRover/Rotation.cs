@@ -4,7 +4,7 @@
 	{
 		public abstract Location Forward { get; }
 
-		public virtual Rotation ToTheLeft() { return new NorthRotation(); }
+		public abstract Rotation ToTheLeft();
 
 		public static Rotation North() => new NorthRotation();
 
@@ -24,15 +24,18 @@
 	internal class EastRotation : Rotation
 	{
 		public override Location Forward => new Location(1, 0);
+		public override Rotation ToTheLeft() => new NorthRotation();
 	}
 
 	internal class SouthRotation : Rotation
 	{
 		public override Location Forward => new Location(0,-1);
+		public override Rotation ToTheLeft() => new EastRotation();
 	}
 
 	public class WestRotation : Rotation
 	{
 		public override Location Forward => new Location(-1, 0);
+		public override Rotation ToTheLeft() => new SouthRotation();
 	}
 }
