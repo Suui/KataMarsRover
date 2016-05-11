@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System;
+using FluentAssertions;
 using KataMarsRover;
 using NUnit.Framework;
 
@@ -20,85 +21,30 @@ namespace KataMarsRoverTest
 			mars.MarsRoverLocation.ShouldBeEquivalentTo(new Location(0, 0));
 		}
 
-		[Test]
-		public void move_forward_when_facing_north()
+		[MoveTestCase("North",	0,  1)]
+		[MoveTestCase("East",	1,  0)]
+		[MoveTestCase("South",	0, -1)]
+		[MoveTestCase("West",  -1,  0)]
+		public void move_forward(Rotation currentRotation, Location expectedLocation)
 		{
-			var mars = AWorldWithAMarsRoverInTheMiddleFacing(Rotation.North());
+			var mars = AWorldWithAMarsRoverInTheMiddleFacing(currentRotation);
 
 			mars.MoveMarsRoverForward();
 
-			mars.MarsRoverLocation.ShouldBeEquivalentTo(new Location(0, 1));
+			mars.MarsRoverLocation.ShouldBeEquivalentTo(expectedLocation);
 		}
 
-		[Test]
-		public void move_forward_when_facing_east()
+		[RotationTestCase("North",	"West")]
+		[RotationTestCase("East",	"North")]
+		[RotationTestCase("South",	"East")]
+		[RotationTestCase("West",	"South")]
+		public void rotate_to_the_left(Rotation currentRotation, Rotation expectedRotation)
 		{
-			var mars = AWorldWithAMarsRoverInTheMiddleFacing(Rotation.East());
-
-			mars.MoveMarsRoverForward();
-
-			mars.MarsRoverLocation.ShouldBeEquivalentTo(new Location(1, 0));
-		}
-
-		[Test]
-		public void move_forward_when_facing_south()
-		{
-			var mars = AWorldWithAMarsRoverInTheMiddleFacing(Rotation.South());
-
-			mars.MoveMarsRoverForward();
-
-			mars.MarsRoverLocation.ShouldBeEquivalentTo(new Location(0, -1));
-		}
-
-		[Test]
-		public void move_forward_when_facing_west()
-		{
-			var mars = AWorldWithAMarsRoverInTheMiddleFacing(Rotation.West());
-
-			mars.MoveMarsRoverForward();
-
-			mars.MarsRoverLocation.ShouldBeEquivalentTo(new Location(-1, 0));
-		}
-
-
-		[Test]
-		public void rotate_to_the_left_when_facing_north()
-		{
-			var mars = AWorldWithAMarsRoverInTheMiddleFacing(Rotation.North());
+			var mars = AWorldWithAMarsRoverInTheMiddleFacing(currentRotation);
 
 			mars.RotateMarsRoverToTheLeft();
 
-			mars.MarsRoverRotation.ShouldBeEquivalentTo(Rotation.West());
-		}
-
-		[Test]
-		public void rotate_to_the_left_when_facing_east()
-		{
-			var mars = AWorldWithAMarsRoverInTheMiddleFacing(Rotation.East());
-
-			mars.RotateMarsRoverToTheLeft();
-
-			mars.MarsRoverRotation.ShouldBeEquivalentTo(Rotation.North());
-		}
-
-		[Test]
-		public void rotate_to_the_left_when_facing_south()
-		{
-			var mars = AWorldWithAMarsRoverInTheMiddleFacing(Rotation.South());
-
-			mars.RotateMarsRoverToTheLeft();
-
-			mars.MarsRoverRotation.ShouldBeEquivalentTo(Rotation.East());
-		}
-
-		[Test]
-		public void rotate_to_the_left_when_facing_west()
-		{
-			var mars = AWorldWithAMarsRoverInTheMiddleFacing(Rotation.West());
-
-			mars.RotateMarsRoverToTheLeft();
-
-			mars.MarsRoverRotation.ShouldBeEquivalentTo(Rotation.South());
+			mars.MarsRoverRotation.ShouldBeEquivalentTo(expectedRotation);
 		}
 
 		private static TestWorld AWorldWithAMarsRoverInTheMiddleFacing(Rotation rotation)
