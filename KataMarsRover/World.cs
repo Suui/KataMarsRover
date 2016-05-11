@@ -1,20 +1,19 @@
-﻿using KataMarsRover.Rotations;
-
-
-namespace KataMarsRover
+﻿namespace KataMarsRover
 {
 	public class World
 	{
 		protected MarsRover MarsRover { get; set; }
 
-		public World(MarsRover marsRover)
+		public World()
 		{
-			MarsRover = marsRover;
-			MarsRover.Rotation = new NorthRotation();
-			MarsRover.Location = new Location(0, 0);
+			MarsRover = new MarsRover
+			{
+				Location = new Location(0, 0),
+				Rotation = new NorthRotation()
+			};
 		}
 
-		public void MoveRoverForward()
+		public void MoveMarsRoverForward()
 		{
 			MarsRover.MoveForward();
 		}

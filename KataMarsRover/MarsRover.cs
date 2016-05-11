@@ -1,7 +1,4 @@
-﻿using KataMarsRover.Rotations;
-
-
-namespace KataMarsRover
+﻿namespace KataMarsRover
 {
 	public class MarsRover
 	{

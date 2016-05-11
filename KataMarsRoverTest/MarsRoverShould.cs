@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using KataMarsRover;
-using KataMarsRover.Rotations;
 using NUnit.Framework;
 
 /* TODO
@@ -17,9 +16,9 @@ namespace KataMarsRoverTest
 		[Test]
 		public void start_facing_north_in_the_center_of_mars()
 		{
-			var mars = new TestWorld(new MarsRover());
+			var mars = new TestWorld();
 
-			mars.MarsRoverRotation.GetType().Should().Be(typeof (NorthRotation));
+			mars.MarsRoverRotation.ShouldBeEquivalentTo(Rotation.North());
 			mars.MarsRoverLocation.ShouldBeEquivalentTo(new Location(0, 0));
 		}
 
@@ -28,14 +27,32 @@ namespace KataMarsRoverTest
 		{
 			var mars = AWorldWithAMarsRoverInTheMiddleFacingNorth();
 
-			mars.MoveRoverForward();
+			mars.MoveMarsRoverForward();
 
 			mars.MarsRoverLocation.ShouldBeEquivalentTo(new Location(0, 1));
 		}
 
+		[Test]
+		public void move_forward_when_facing_east()
+		{
+			var mars = new TestWorld(new MarsRover
+			{
+				Location = new Location(0, 0),
+				Rotation = Rotation.East()
+			});
+
+			mars.MoveMarsRoverForward();
+
+			mars.MarsRoverLocation.ShouldBeEquivalentTo(new Location(1, 0));
+		}
+
 		private static TestWorld AWorldWithAMarsRoverInTheMiddleFacingNorth()
 		{
-			return new TestWorld(new MarsRover());
+			return new TestWorld(new MarsRover
+			{
+				Location = new Location(0, 0),
+				Rotation = Rotation.North()
+			});
 		}
 	}
 
@@ -44,6 +61,11 @@ namespace KataMarsRoverTest
 		public Rotation MarsRoverRotation => MarsRover.Rotation;
 		public Location MarsRoverLocation => MarsRover.Location;
 
-		public TestWorld(MarsRover marsRover) : base(marsRover) { }
+		public TestWorld() {}
+
+		public TestWorld(MarsRover marsRover)
+		{
+			MarsRover = marsRover;
+		}
 	}
 }
