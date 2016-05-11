@@ -22,6 +22,21 @@ namespace KataMarsRoverTest
 			mars.MarsRoverRotation.GetType().Should().Be(typeof (NorthRotation));
 			mars.MarsRoverLocation.ShouldBeEquivalentTo(new Location(0, 0));
 		}
+
+		[Test]
+		public void move_forward_when_facing_north()
+		{
+			var mars = AWorldWithAMarsRoverInTheMiddleFacingNorth();
+
+			mars.MoveRoverForward();
+
+			mars.MarsRoverLocation.ShouldBeEquivalentTo(new Location(0, 1));
+		}
+
+		private static TestWorld AWorldWithAMarsRoverInTheMiddleFacingNorth()
+		{
+			return new TestWorld(new MarsRover());
+		}
 	}
 
 	internal class TestWorld : World

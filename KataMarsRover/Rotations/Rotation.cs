@@ -1,6 +1,7 @@
 ﻿namespace KataMarsRover.Rotations
 {
-	public class Rotation
+	public abstract class Rotation
 	{
+		public abstract Location Forward { get; }
 	}
 }

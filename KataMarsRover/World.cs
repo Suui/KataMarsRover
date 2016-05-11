@@ -13,5 +13,10 @@ namespace KataMarsRover
 			MarsRover.Rotation = new NorthRotation();
 			MarsRover.Location = new Location(0, 0);
 		}
+
+		public void MoveRoverForward()
+		{
+			MarsRover.MoveForward();
+		}
 	}
 }

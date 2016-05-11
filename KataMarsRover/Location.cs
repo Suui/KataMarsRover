@@ -11,6 +11,11 @@
 			Y = y;
 		}
 
+		public static Location operator +(Location first, Location second)
+		{
+			return new Location(first.X + second.X, first.Y + second.Y);
+		}
+
 		protected bool Equals(Location other)
 		{
 			return X == other.X && Y == other.Y;
