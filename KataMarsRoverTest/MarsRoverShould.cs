@@ -3,7 +3,6 @@ using KataMarsRover;
 using NUnit.Framework;
 
 /* TODO
-	- Be able to rotate to the left or to the right in single steps
 */
 
 namespace KataMarsRoverTest
