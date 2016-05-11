@@ -3,9 +3,7 @@ using KataMarsRover;
 using NUnit.Framework;
 
 /* TODO
-	- Face North, East, South or West
 	- Be able to rotate to the left or to the right in single steps
-	- Be able to move forward in single steps
 */
 
 namespace KataMarsRoverTest
