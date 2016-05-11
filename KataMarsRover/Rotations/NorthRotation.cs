@@ -1,4 +1,4 @@
-﻿namespace KataMarsRover
+﻿namespace KataMarsRover.Rotations
 {
 	public class NorthRotation : Rotation
 	{

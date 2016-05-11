@@ -1,4 +1,7 @@
-﻿namespace KataMarsRover
+﻿using KataMarsRover.Rotations;
+
+
+namespace KataMarsRover
 {
 	public class World
 	{

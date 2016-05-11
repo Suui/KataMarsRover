@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using KataMarsRover;
+using KataMarsRover.Rotations;
 using NUnit.Framework;
 
 /* TODO
