@@ -9,6 +9,8 @@
 		public static Rotation East() => new EastRotation();
 
 		public static Rotation South() => new SouthRotation();
+
+		public static Rotation West() => new WestRotation();
 	}
 
 	internal class NorthRotation : Rotation
@@ -24,5 +26,10 @@
 	internal class SouthRotation : Rotation
 	{
 		public override Location Forward => new Location(0,-1);
+	}
+
+	public class WestRotation : Rotation
+	{
+		public override Location Forward => new Location(-1, 0);
 	}
 }

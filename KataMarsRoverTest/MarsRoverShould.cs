@@ -52,6 +52,25 @@ namespace KataMarsRoverTest
 			mars.MarsRoverLocation.ShouldBeEquivalentTo(new Location(0, -1));
 		}
 
+		[Test]
+		public void move_forward_when_facing_west()
+		{
+			var mars = AWorldWithAMarsRoverInTheMiddleFacingWest();
+
+			mars.MoveMarsRoverForward();
+
+			mars.MarsRoverLocation.ShouldBeEquivalentTo(new Location(-1, 0));
+		}
+
+		private TestWorld AWorldWithAMarsRoverInTheMiddleFacingWest()
+		{
+			return new TestWorld(new MarsRover
+			{
+				Location = new Location(0, 0),
+				Rotation = Rotation.West()
+			});
+		}
+
 		private TestWorld AWorldWithAMarsRoverInTheMiddleFacingSouth()
 		{
 			return new TestWorld(new MarsRover
