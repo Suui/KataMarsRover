@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System;
+using FluentAssertions;
 using KataMarsRover;
 using NUnit.Framework;
 
@@ -28,9 +29,9 @@ namespace KataMarsRoverTest
 		[MoveTestCase("East",	6, 5)]
 		[MoveTestCase("South",	5, 4)]
 		[MoveTestCase("West",	4, 5)]
-		public void move_forward(Rotation currentRotation, Location expectedLocation)
+		public void move_forward(Rotation rotation, Location expectedLocation)
 		{
-			var mars = AWorldWithARoverIn(new Location(5, 5), currentRotation);
+			var mars = AWorldWithARoverIn(new Location(5, 5), rotation);
 
 			mars.MoveRoverForward();
 
@@ -43,7 +44,7 @@ namespace KataMarsRoverTest
 		[RotationTestCase("West",	"South")]
 		public void rotate_to_the_left(Rotation currentRotation, Rotation expectedRotation)
 		{
-			var mars = AWorldWithARoverInTheMiddleFacing(currentRotation);
+			var mars = AWorldWithARoverIn(new Location(0, 0), currentRotation);
 
 			mars.RotateRoverToTheLeft();
 
@@ -56,30 +57,24 @@ namespace KataMarsRoverTest
 		[RotationTestCase("West",	"North")]
 		public void rotate_to_the_right(Rotation currentRotation, Rotation expectedRotation)
 		{
-			var mars = AWorldWithARoverInTheMiddleFacing(currentRotation);
+			var mars = AWorldWithARoverIn(new Location(0, 0), currentRotation);
 
 			mars.RotateRoverToTheRight();
 
 			mars.RoverRotation.ShouldBeEquivalentTo(expectedRotation);
 		}
 
-		[Test]
-		public void wrap_over_the_grid_if_it_reaches_the_end()
+		[WrapWorldTestCase(10, 10, "North", 10, 0)]
+		[WrapWorldTestCase(10, 10, "East", 0, 10)]
+		[WrapWorldTestCase(0, 0, "South", 0, 10)]
+		[WrapWorldTestCase(0, 0, "West", 10, 0)]
+		public void wrap_over_the_grid_if_it_reaches_the_end(Location currentLocation, Rotation rotation, Location expectedLocation)
 		{
-			var mars = AWorldWithARoverInTheMiddleFacing(Rotation.South());
+			var mars = AWorldWithARoverIn(currentLocation, rotation);
 
 			mars.MoveRoverForward();
 
-			mars.RoverLocation.Should().Be(new Location(0, 10));
-		}
-
-		private static TestWorld AWorldWithARoverInTheMiddleFacing(Rotation rotation)
-		{
-			return new TestWorld(new Rover
-			{
-				Location = new Location(0, 0),
-				Rotation = rotation
-			});
+			mars.RoverLocation.Should().Be(expectedLocation);
 		}
 
 		private static TestWorld AWorldWithARoverIn(Location location, Rotation rotation)

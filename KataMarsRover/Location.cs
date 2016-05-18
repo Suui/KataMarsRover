@@ -20,6 +20,10 @@
 		public void Delimit(int limit)
 		{
 			if (Y < 0) Y = limit;
+			if (Y > limit) Y = 0;
+
+			if (X < 0) X = limit;
+			if (X > limit) X = 0;
 		}
 
 		protected bool Equals(Location other)

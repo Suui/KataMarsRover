@@ -15,6 +15,15 @@ namespace KataMarsRoverTest
 		public MoveTestCase(string stringRotation, int x, int y): base(stringRotation.ToRotation(), new Location(x, y)) {}
 	}
 
+	internal class WrapWorldTestCaseAttribute : TestCaseAttribute
+	{
+		public WrapWorldTestCaseAttribute(int currentX, int currentY, string stringRotation, int expectedX, int expectedY)
+			: base(new Location(currentX, currentY), stringRotation.ToRotation(), new Location(expectedX, expectedY))
+		{
+		}
+	}
+
+
 	internal static class StringExtensions
 	{
 		public static Rotation ToRotation(this string stringRotation)
