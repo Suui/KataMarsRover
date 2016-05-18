@@ -2,8 +2,8 @@
 {
 	public class Location
 	{
-		public int X { get; }
-		public int Y { get; }
+		public int X { get; private set; }
+		public int Y { get; private set; }
 
 		public Location(int x, int y)
 		{
@@ -11,16 +11,15 @@
 			Y = y;
 		}
 
-		public static Location operator +(Location first, Location second)
+		public void Sum(Location other)
 		{
-			return new Location(first.X + second.X, first.Y + second.Y);
+			X += other.X;
+			Y += other.Y;
 		}
 
-		public Location Delimit(int limit)
+		public void Delimit(int limit)
 		{
-			var y = Y;
-			if (y < 0) y = limit;
-			return new Location(X, y);
+			if (Y < 0) Y = limit;
 		}
 
 		protected bool Equals(Location other)
