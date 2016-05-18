@@ -3,12 +3,17 @@ using KataMarsRover;
 using NUnit.Framework;
 
 /* TODO
+	- The rover moves in a 10 by 10 grid
+	- The rover wraps around if it reaches the end of the grid
+	- The rover receives a char array of commands and returns the finishing point as X, Y, R
+	- The grid may have obstacles. If the rover encounters an obstacle it moves to the last possible
+	  point and reports the obstacle as O, X, Y, R
 */
 
 namespace KataMarsRoverTest
 {
 	[TestFixture]
-	class MarsRoverShould
+	class RoverShould
 	{
 		[Test]
 		public void start_facing_north_in_the_center_of_mars()
