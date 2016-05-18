@@ -15,8 +15,8 @@ namespace KataMarsRoverTest
 		{
 			var mars = new TestWorld();
 
-			mars.MarsRoverRotation.ShouldBeEquivalentTo(Rotation.North());
-			mars.MarsRoverLocation.ShouldBeEquivalentTo(new Location(0, 0));
+			mars.RoverRotation.ShouldBeEquivalentTo(Rotation.North());
+			mars.RoverLocation.ShouldBeEquivalentTo(new Location(0, 0));
 		}
 
 		[MoveTestCase("North",	0,  1)]
@@ -25,11 +25,11 @@ namespace KataMarsRoverTest
 		[MoveTestCase("West",  -1,  0)]
 		public void move_forward(Rotation currentRotation, Location expectedLocation)
 		{
-			var mars = AWorldWithAMarsRoverInTheMiddleFacing(currentRotation);
+			var mars = AWorldWithARoverInTheMiddleFacing(currentRotation);
 
-			mars.MoveMarsRoverForward();
+			mars.MoveRoverForward();
 
-			mars.MarsRoverLocation.ShouldBeEquivalentTo(expectedLocation);
+			mars.RoverLocation.ShouldBeEquivalentTo(expectedLocation);
 		}
 
 		[RotationTestCase("North",	"West")]
@@ -38,11 +38,11 @@ namespace KataMarsRoverTest
 		[RotationTestCase("West",	"South")]
 		public void rotate_to_the_left(Rotation currentRotation, Rotation expectedRotation)
 		{
-			var mars = AWorldWithAMarsRoverInTheMiddleFacing(currentRotation);
+			var mars = AWorldWithARoverInTheMiddleFacing(currentRotation);
 
-			mars.RotateMarsRoverToTheLeft();
+			mars.RotateRoverToTheLeft();
 
-			mars.MarsRoverRotation.ShouldBeEquivalentTo(expectedRotation);
+			mars.RoverRotation.ShouldBeEquivalentTo(expectedRotation);
 		}
 
 		[RotationTestCase("North",	"East")]
@@ -51,16 +51,16 @@ namespace KataMarsRoverTest
 		[RotationTestCase("West",	"North")]
 		public void rotate_to_the_right(Rotation currentRotation, Rotation expectedRotation)
 		{
-			var mars = AWorldWithAMarsRoverInTheMiddleFacing(currentRotation);
+			var mars = AWorldWithARoverInTheMiddleFacing(currentRotation);
 
-			mars.RotateMarsRoverToTheRight();
+			mars.RotateRoverToTheRight();
 
-			mars.MarsRoverRotation.ShouldBeEquivalentTo(expectedRotation);
+			mars.RoverRotation.ShouldBeEquivalentTo(expectedRotation);
 		}
 
-		private static TestWorld AWorldWithAMarsRoverInTheMiddleFacing(Rotation rotation)
+		private static TestWorld AWorldWithARoverInTheMiddleFacing(Rotation rotation)
 		{
-			return new TestWorld(new MarsRover
+			return new TestWorld(new Rover
 			{
 				Location = new Location(0, 0),
 				Rotation = rotation
@@ -70,14 +70,14 @@ namespace KataMarsRoverTest
 
 	internal class TestWorld : World
 	{
-		public Rotation MarsRoverRotation => MarsRover.Rotation;
-		public Location MarsRoverLocation => MarsRover.Location;
+		public Rotation RoverRotation => Rover.Rotation;
+		public Location RoverLocation => Rover.Location;
 
 		public TestWorld() {}
 
-		public TestWorld(MarsRover marsRover)
+		public TestWorld(Rover rover)
 		{
-			MarsRover = marsRover;
+			Rover = rover;
 		}
 	}
 }

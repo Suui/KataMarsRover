@@ -2,21 +2,21 @@
 {
 	public class World
 	{
-		protected MarsRover MarsRover { get; set; }
+		protected Rover Rover { get; set; }
 
 		public World()
 		{
-			MarsRover = new MarsRover
+			Rover = new Rover
 			{
 				Location = new Location(0, 0),
 				Rotation = new NorthRotation()
 			};
 		}
 
-		public void MoveMarsRoverForward() => MarsRover.MoveForward();
+		public void MoveRoverForward() => Rover.MoveForward();
 
-		public void RotateMarsRoverToTheLeft() => MarsRover.RotateToTheLeft();
+		public void RotateRoverToTheLeft() => Rover.RotateToTheLeft();
 
-		public void RotateMarsRoverToTheRight() => MarsRover.RotateToTheRight();
+		public void RotateRoverToTheRight() => Rover.RotateToTheRight();
 	}
 }

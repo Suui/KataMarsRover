@@ -1,6 +1,6 @@
 ﻿namespace KataMarsRover
 {
-	public class MarsRover
+	public class Rover
 	{
 		public Rotation Rotation { get; set; }
 		public Location Location { get; set; }
