@@ -3,6 +3,7 @@
 	public class World
 	{
 		protected Rover Rover { get; set; }
+		public int Limit { get; } = 10;
 
 		public World()
 		{
@@ -13,7 +14,7 @@
 			};
 		}
 
-		public void MoveRoverForward() => Rover.MoveForward();
+		public void MoveRoverForward() => Rover.MoveForwardIn(this);
 
 		public void RotateRoverToTheLeft() => Rover.RotateToTheLeft();
 

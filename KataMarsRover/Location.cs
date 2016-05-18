@@ -16,6 +16,13 @@
 			return new Location(first.X + second.X, first.Y + second.Y);
 		}
 
+		public Location Delimit(int limit)
+		{
+			var y = Y;
+			if (y < 0) y = limit;
+			return new Location(X, y);
+		}
+
 		protected bool Equals(Location other)
 		{
 			return X == other.X && Y == other.Y;

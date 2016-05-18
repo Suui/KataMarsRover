@@ -24,13 +24,13 @@ namespace KataMarsRoverTest
 			mars.RoverLocation.ShouldBeEquivalentTo(new Location(0, 0));
 		}
 
-		[MoveTestCase("North",	0,  1)]
-		[MoveTestCase("East",	1,  0)]
-		[MoveTestCase("South",	0, -1)]
-		[MoveTestCase("West",  -1,  0)]
+		[MoveTestCase("North",	5, 6)]
+		[MoveTestCase("East",	6, 5)]
+		[MoveTestCase("South",	5, 4)]
+		[MoveTestCase("West",	4, 5)]
 		public void move_forward(Rotation currentRotation, Location expectedLocation)
 		{
-			var mars = AWorldWithARoverInTheMiddleFacing(currentRotation);
+			var mars = AWorldWithARoverIn(new Location(5, 5), currentRotation);
 
 			mars.MoveRoverForward();
 
@@ -63,11 +63,30 @@ namespace KataMarsRoverTest
 			mars.RoverRotation.ShouldBeEquivalentTo(expectedRotation);
 		}
 
+		[Test]
+		public void wrap_over_the_grid_if_it_reaches_the_end()
+		{
+			var mars = AWorldWithARoverInTheMiddleFacing(Rotation.South());
+
+			mars.MoveRoverForward();
+
+			mars.RoverLocation.Should().Be(new Location(0, 10));
+		}
+
 		private static TestWorld AWorldWithARoverInTheMiddleFacing(Rotation rotation)
 		{
 			return new TestWorld(new Rover
 			{
 				Location = new Location(0, 0),
+				Rotation = rotation
+			});
+		}
+
+		private static TestWorld AWorldWithARoverIn(Location location, Rotation rotation)
+		{
+			return new TestWorld(new Rover
+			{
+				Location = location,
 				Rotation = rotation
 			});
 		}
