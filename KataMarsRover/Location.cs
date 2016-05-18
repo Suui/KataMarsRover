@@ -19,11 +19,15 @@
 
 		public void Delimit(int limit)
 		{
-			if (Y < 0) Y = limit;
-			if (Y > limit) Y = 0;
+			X %= limit + 1;
+			X -= limit;
+			X %= limit + 1;
+			X += limit;
 
-			if (X < 0) X = limit;
-			if (X > limit) X = 0;
+			Y %= limit + 1;
+			Y -= limit;
+			Y %= limit + 1;
+			Y += limit;
 		}
 
 		protected bool Equals(Location other)
@@ -33,9 +37,6 @@
 
 		public override bool Equals(object obj)
 		{
-			if (ReferenceEquals(null, obj)) return false;
-			if (ReferenceEquals(this, obj)) return true;
-			if (obj.GetType() != this.GetType()) return false;
 			return Equals((Location) obj);
 		}
 
